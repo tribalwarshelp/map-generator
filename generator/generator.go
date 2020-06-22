@@ -3,7 +3,6 @@ package generator
 import (
 	"fmt"
 	"image"
-	"image/color"
 	"image/png"
 	"io"
 
@@ -12,8 +11,10 @@ import (
 )
 
 const (
-	defaultBackgroundColor = "#000"
-	defaultMapSize         = 1000
+	defaultBackgroundColor      = "#000"
+	defaultGridLineColor        = "#fff"
+	defaultContinentNumberColor = "#fff"
+	defaultMapSize              = 1000
 )
 
 type Marker struct {
@@ -22,17 +23,25 @@ type Marker struct {
 }
 
 type Config struct {
-	Markers          []*Marker
-	Destination      io.Writer
-	MapSize          int
-	ContinentGrid    bool
-	ContinentNumbers bool
-	BackgroundColor  string
+	Markers              []*Marker
+	Destination          io.Writer
+	MapSize              int
+	ContinentGrid        bool
+	ContinentNumbers     bool
+	BackgroundColor      string
+	GridLineColor        string
+	ContinentNumberColor string
 }
 
 func (cfg *Config) init() {
 	if cfg.BackgroundColor == "" {
 		cfg.BackgroundColor = defaultBackgroundColor
+	}
+	if cfg.GridLineColor == "" {
+		cfg.GridLineColor = defaultGridLineColor
+	}
+	if cfg.ContinentNumberColor == "" {
+		cfg.ContinentNumberColor = defaultContinentNumberColor
 	}
 	if cfg.MapSize <= 0 {
 		cfg.MapSize = defaultMapSize
@@ -70,27 +79,35 @@ func Generate(cfg Config) error {
 
 	//Continents
 	if cfg.ContinentGrid {
+		gridLineColor, err := parseHexColorFast(cfg.GridLineColor)
+		if err != nil {
+			return errors.Wrap(err, "map-generator")
+		}
 		for y := cfg.MapSize / 10; y < cfg.MapSize; y += cfg.MapSize / 10 {
 			for x := 0; x < cfg.MapSize; x++ {
-				img.Set(x, y, color.White)
+				img.Set(x, y, gridLineColor)
 			}
 		}
 		for x := cfg.MapSize / 10; x < cfg.MapSize; x += cfg.MapSize / 10 {
 			for y := 0; y < cfg.MapSize; y++ {
-				img.Set(x, y, color.White)
+				img.Set(x, y, gridLineColor)
 			}
 		}
 	}
 
 	if cfg.ContinentNumbers {
 		continent := 0
+		continentNumberColor, err := parseHexColorFast(cfg.ContinentNumberColor)
+		if err != nil {
+			return errors.Wrap(err, "map-generator")
+		}
 		for y := cfg.MapSize / 10; y <= cfg.MapSize; y += cfg.MapSize / 10 {
 			for x := cfg.MapSize / 10; x <= cfg.MapSize; x += cfg.MapSize / 10 {
 				continentStr := fmt.Sprintf("%d", continent)
 				if continent < 10 {
 					continentStr = fmt.Sprintf("0%d", continent)
 				}
-				drawText(img, x-16, y-3, continentStr)
+				drawText(img, x-16, y-3, continentNumberColor, continentStr)
 				continent++
 			}
 		}

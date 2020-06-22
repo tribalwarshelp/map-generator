@@ -51,8 +51,7 @@ func parseHexColorFast(s string) (color.RGBA, error) {
 	return c, err
 }
 
-func drawText(img *image.RGBA, x, y int, text string) {
-	col := color.RGBA{200, 100, 0, 255}
+func drawText(img *image.RGBA, x, y int, col color.RGBA, text string) {
 	point := fixed.Point26_6{fixed.Int26_6(x * 64), fixed.Int26_6(y * 64)}
 
 	d := &font.Drawer{
