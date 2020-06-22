@@ -12,14 +12,13 @@ import (
 )
 
 const (
-	defaultBackgroundColor = "#69380e"
+	defaultBackgroundColor = "#000"
 	defaultMapSize         = 1000
 )
 
 type Marker struct {
-	Villages []*models.Village
-	Color    string
-	Name     string
+	Villages []*models.Village `json:"villages" gqlgen:"villages" xml:"villages"`
+	Color    string            `json:"color" gqlgen:"color" xml:"color"`
 }
 
 type Config struct {
@@ -73,12 +72,12 @@ func Generate(cfg Config) error {
 	if cfg.ContinentGrid {
 		for y := cfg.MapSize / 10; y < cfg.MapSize; y += cfg.MapSize / 10 {
 			for x := 0; x < cfg.MapSize; x++ {
-				img.Set(x, y, color.Black)
+				img.Set(x, y, color.White)
 			}
 		}
 		for x := cfg.MapSize / 10; x < cfg.MapSize; x += cfg.MapSize / 10 {
 			for y := 0; y < cfg.MapSize; y++ {
-				img.Set(x, y, color.Black)
+				img.Set(x, y, color.White)
 			}
 		}
 	}
