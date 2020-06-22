@@ -1,0 +1,4 @@
+github.com/pkg/errors v0.9.1 h1:FEBLx1zS214owpjy7qsBeixbURkuhQAwrK5UwLGTwt4=
+github.com/pkg/errors v0.9.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
+github.com/tribalwarshelp/shared v0.0.0-20200622084436-3a768c8bf574 h1:y2EoH6zRK9Uc0AeswnJRYUUIQYcSLZB5VDFuxPCKxNM=
+github.com/tribalwarshelp/shared v0.0.0-20200622084436-3a768c8bf574/go.mod h1:tf+2yTHasV6jAF3V2deZ9slNoCyBzC0fMdTjI7clf6Y=
