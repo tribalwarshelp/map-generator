@@ -3,8 +3,11 @@ package generator
 import (
 	"fmt"
 	"image"
+	"image/draw"
 	"image/png"
 	"io"
+
+	"github.com/nfnt/resize"
 
 	"github.com/pkg/errors"
 	"github.com/tribalwarshelp/shared/models"
@@ -31,6 +34,9 @@ type Config struct {
 	BackgroundColor      string
 	GridLineColor        string
 	ContinentNumberColor string
+	Scale                float32
+	CenterX              int
+	CenterY              int
 }
 
 func (cfg *Config) init() {
@@ -46,6 +52,18 @@ func (cfg *Config) init() {
 	if cfg.MapSize <= 0 {
 		cfg.MapSize = defaultMapSize
 	}
+	if cfg.Scale <= 0 {
+		cfg.Scale = 1
+	}
+	if cfg.CenterX <= 0 {
+		cfg.CenterX = cfg.MapSize / 2
+	}
+	if cfg.CenterY <= 0 {
+		cfg.CenterY = cfg.MapSize / 2
+	}
+
+	cfg.CenterX = int(float32(cfg.CenterX) * cfg.Scale)
+	cfg.CenterY = int(float32(cfg.CenterY) * cfg.Scale)
 }
 
 func Generate(cfg Config) error {
@@ -53,6 +71,9 @@ func Generate(cfg Config) error {
 	upLeft := image.Point{0, 0}
 	lowRight := image.Point{cfg.MapSize, cfg.MapSize}
 	img := image.NewRGBA(image.Rectangle{upLeft, lowRight})
+	mapSizeDividedBy10 := cfg.MapSize / 10
+	imgHalfWidth := cfg.MapSize / 2
+	imgHalfHeight := imgHalfWidth
 
 	backgroundColor, err := parseHexColorFast(cfg.BackgroundColor)
 	if err != nil {
@@ -83,12 +104,12 @@ func Generate(cfg Config) error {
 		if err != nil {
 			return errors.Wrap(err, "map-generator")
 		}
-		for y := cfg.MapSize / 10; y < cfg.MapSize; y += cfg.MapSize / 10 {
+		for y := mapSizeDividedBy10; y < cfg.MapSize; y += mapSizeDividedBy10 {
 			for x := 0; x < cfg.MapSize; x++ {
 				img.Set(x, y, gridLineColor)
 			}
 		}
-		for x := cfg.MapSize / 10; x < cfg.MapSize; x += cfg.MapSize / 10 {
+		for x := mapSizeDividedBy10; x < cfg.MapSize; x += mapSizeDividedBy10 {
 			for y := 0; y < cfg.MapSize; y++ {
 				img.Set(x, y, gridLineColor)
 			}
@@ -101,8 +122,8 @@ func Generate(cfg Config) error {
 		if err != nil {
 			return errors.Wrap(err, "map-generator")
 		}
-		for y := cfg.MapSize / 10; y <= cfg.MapSize; y += cfg.MapSize / 10 {
-			for x := cfg.MapSize / 10; x <= cfg.MapSize; x += cfg.MapSize / 10 {
+		for y := mapSizeDividedBy10; y <= cfg.MapSize; y += mapSizeDividedBy10 {
+			for x := mapSizeDividedBy10; x <= cfg.MapSize; x += mapSizeDividedBy10 {
 				continentStr := fmt.Sprintf("%d", continent)
 				if continent < 10 {
 					continentStr = fmt.Sprintf("0%d", continent)
@@ -113,7 +134,20 @@ func Generate(cfg Config) error {
 		}
 	}
 
-	if err := png.Encode(cfg.Destination, img); err != nil {
+	var resizedImg image.Image = img
+	if cfg.Scale != 1 {
+		width := uint(float32(cfg.MapSize) * cfg.Scale)
+		resizedImg = resize.Resize(width, width, img, resize.Lanczos3)
+	}
+
+	b := resizedImg.Bounds()
+	centered := image.NewRGBA(image.Rectangle{upLeft, lowRight})
+	draw.Draw(centered, b, resizedImg, image.Point{
+		X: cfg.CenterX - imgHalfWidth,
+		Y: cfg.CenterY - imgHalfHeight,
+	}, draw.Src)
+
+	if err := png.Encode(cfg.Destination, centered); err != nil {
 		return errors.Wrap(err, "map-generator")
 	}
 	return nil
