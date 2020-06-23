@@ -5,7 +5,6 @@ import (
 	"image"
 	"image/color"
 
-	"golang.org/x/image/draw"
 	"golang.org/x/image/font"
 	"golang.org/x/image/font/basicfont"
 	"golang.org/x/image/math/fixed"
@@ -62,10 +61,4 @@ func drawText(img *image.RGBA, x, y int, col color.RGBA, text string) {
 		Dot:  point,
 	}
 	d.DrawString(text)
-}
-
-func scale(src image.Image, rect image.Rectangle) image.Image {
-	dst := image.NewRGBA(rect)
-	draw.NearestNeighbor.Scale(dst, rect, src, src.Bounds(), draw.Over, nil)
-	return dst
 }

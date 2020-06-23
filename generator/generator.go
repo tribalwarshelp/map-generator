@@ -4,8 +4,10 @@ import (
 	"fmt"
 	"image"
 	"image/draw"
-	"image/png"
+	"image/jpeg"
 	"io"
+
+	"github.com/disintegration/imaging"
 
 	"github.com/pkg/errors"
 	"github.com/tribalwarshelp/shared/models"
@@ -135,7 +137,7 @@ func Generate(cfg Config) error {
 	var resizedImg image.Image = img
 	if cfg.Scale != 1 {
 		width := int(float32(cfg.MapSize) * cfg.Scale)
-		resizedImg = scale(img, image.Rect(0, 0, width, width))
+		resizedImg = imaging.Resize(img, width, width, imaging.NearestNeighbor)
 	}
 
 	b := resizedImg.Bounds()
@@ -145,7 +147,9 @@ func Generate(cfg Config) error {
 		Y: cfg.CenterY - imgHalfHeight,
 	}, draw.Src)
 
-	if err := png.Encode(cfg.Destination, centered); err != nil {
+	if err := jpeg.Encode(cfg.Destination, centered, &jpeg.Options{
+		Quality: 80,
+	}); err != nil {
 		return errors.Wrap(err, "map-generator")
 	}
 	return nil
