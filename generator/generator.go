@@ -7,8 +7,6 @@ import (
 	"image/png"
 	"io"
 
-	"github.com/nfnt/resize"
-
 	"github.com/pkg/errors"
 	"github.com/tribalwarshelp/shared/models"
 )
@@ -136,8 +134,8 @@ func Generate(cfg Config) error {
 
 	var resizedImg image.Image = img
 	if cfg.Scale != 1 {
-		width := uint(float32(cfg.MapSize) * cfg.Scale)
-		resizedImg = resize.Resize(width, width, img, resize.Lanczos3)
+		width := int(float32(cfg.MapSize) * cfg.Scale)
+		resizedImg = scale(img, image.Rect(0, 0, width, width))
 	}
 
 	b := resizedImg.Bounds()
