@@ -52,7 +52,7 @@ func (cfg *Config) init() {
 	if cfg.MapSize <= 0 {
 		cfg.MapSize = defaultMapSize
 	}
-	if cfg.Scale <= 0 {
+	if cfg.Scale < 1 {
 		cfg.Scale = 1
 	}
 	if cfg.CenterX <= 0 {
