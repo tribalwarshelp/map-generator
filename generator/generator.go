@@ -8,6 +8,7 @@ import (
 	"io"
 
 	"github.com/disintegration/imaging"
+	"golang.org/x/sync/errgroup"
 
 	"github.com/pkg/errors"
 	"github.com/tribalwarshelp/shared/models"
@@ -21,6 +22,7 @@ const (
 )
 
 type Marker struct {
+	Larger   bool
 	Villages []*models.Village `json:"villages" gqlgen:"villages" xml:"villages"`
 	Color    string            `json:"color" gqlgen:"color" xml:"color"`
 }
@@ -74,6 +76,7 @@ func Generate(cfg Config) error {
 	mapSizeDividedBy10 := cfg.MapSize / 10
 	imgHalfWidth := cfg.MapSize / 2
 	imgHalfHeight := imgHalfWidth
+	g := new(errgroup.Group)
 
 	backgroundColor, err := parseHexColorFast(cfg.BackgroundColor)
 	if err != nil {
@@ -89,13 +92,32 @@ func Generate(cfg Config) error {
 
 	// Markers
 	for _, marker := range cfg.Markers {
-		parsedColor, err := parseHexColorFast(marker.Color)
-		if err != nil {
-			return err
-		}
-		for _, village := range marker.Villages {
-			img.Set(village.X, village.Y, parsedColor)
-		}
+		m := marker
+		g.Go(func() error {
+			parsedColor, err := parseHexColorFast(m.Color)
+			if err != nil {
+				return err
+			}
+			for _, village := range m.Villages {
+				if m.Larger {
+					for y := 1; y <= 4; y++ {
+						for x := 1; x <= 4; x++ {
+							img.Set(village.X+x, village.Y-y, parsedColor)
+							img.Set(village.X-x, village.Y-y, parsedColor)
+							img.Set(village.X+x, village.Y+y, parsedColor)
+							img.Set(village.X-x, village.Y+y, parsedColor)
+						}
+					}
+				} else {
+					img.Set(village.X, village.Y, parsedColor)
+				}
+			}
+			return nil
+		})
+	}
+
+	if err := g.Wait(); err != nil {
+		return err
 	}
 
 	//Continents
