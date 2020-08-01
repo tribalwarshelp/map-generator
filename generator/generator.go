@@ -109,15 +109,18 @@ func Generate(cfg Config) error {
 				if m.Larger {
 					for y := 1; y <= 4; y++ {
 						for x := 1; x <= 4; x++ {
+							img.Set(village.X+x, village.Y, parsedColor)
+							img.Set(village.X-x, village.Y, parsedColor)
+							img.Set(village.X, village.Y+y, parsedColor)
+							img.Set(village.X, village.Y-y, parsedColor)
 							img.Set(village.X+x, village.Y-y, parsedColor)
 							img.Set(village.X-x, village.Y-y, parsedColor)
 							img.Set(village.X+x, village.Y+y, parsedColor)
 							img.Set(village.X-x, village.Y+y, parsedColor)
 						}
 					}
-				} else {
-					img.Set(village.X, village.Y, parsedColor)
 				}
+				img.Set(village.X, village.Y, parsedColor)
 			}
 			return nil
 		})

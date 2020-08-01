@@ -32,8 +32,8 @@ func main() {
 				Color: "#fff",
 				Villages: []*models.Village{
 					&models.Village{
-						X: 500,
-						Y: 500,
+						X: 550,
+						Y: 550,
 					},
 				},
 				Larger: true,
