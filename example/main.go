@@ -24,12 +24,12 @@ func main() {
 		ContinentNumbers: true,
 		Markers: []*generator.Marker{
 			&generator.Marker{
-				Color:    "#fff",
+				Color:    "#f0f",
 				Villages: villages,
 				Larger:   false,
 			},
 			&generator.Marker{
-				Color: "#ff0",
+				Color: "#fff",
 				Villages: []*models.Village{
 					&models.Village{
 						X: 500,

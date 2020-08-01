@@ -19,6 +19,7 @@ const (
 	defaultGridLineColor        = "#fff"
 	defaultContinentNumberColor = "#fff"
 	defaultMapSize              = 1000
+	defaultQuality              = 80
 )
 
 type Marker struct {
@@ -39,6 +40,7 @@ type Config struct {
 	Scale                float32
 	CenterX              int
 	CenterY              int
+	Quality              int
 }
 
 func (cfg *Config) init() {
@@ -53,6 +55,9 @@ func (cfg *Config) init() {
 	}
 	if cfg.MapSize <= 0 {
 		cfg.MapSize = defaultMapSize
+	}
+	if cfg.Quality <= 0 {
+		cfg.Quality = defaultQuality
 	}
 	if cfg.Scale < 1 {
 		cfg.Scale = 1
@@ -78,15 +83,17 @@ func Generate(cfg Config) error {
 	imgHalfHeight := imgHalfWidth
 	g := new(errgroup.Group)
 
-	backgroundColor, err := parseHexColorFast(cfg.BackgroundColor)
-	if err != nil {
-		return errors.Wrap(err, "map-generator")
-	}
+	if cfg.BackgroundColor != defaultBackgroundColor {
+		backgroundColor, err := parseHexColorFast(cfg.BackgroundColor)
+		if err != nil {
+			return errors.Wrap(err, "map-generator")
+		}
 
-	// Background.
-	for y := 0; y < cfg.MapSize; y++ {
-		for x := 0; x < cfg.MapSize; x++ {
-			img.Set(x, y, backgroundColor)
+		// Background.
+		for y := 0; y < cfg.MapSize; y++ {
+			for x := 0; x < cfg.MapSize; x++ {
+				img.Set(x, y, backgroundColor)
+			}
 		}
 	}
 
@@ -129,11 +136,7 @@ func Generate(cfg Config) error {
 		for y := mapSizeDividedBy10; y < cfg.MapSize; y += mapSizeDividedBy10 {
 			for x := 0; x < cfg.MapSize; x++ {
 				img.Set(x, y, gridLineColor)
-			}
-		}
-		for x := mapSizeDividedBy10; x < cfg.MapSize; x += mapSizeDividedBy10 {
-			for y := 0; y < cfg.MapSize; y++ {
-				img.Set(x, y, gridLineColor)
+				img.Set(y, x, gridLineColor)
 			}
 		}
 	}
@@ -170,7 +173,7 @@ func Generate(cfg Config) error {
 	}, draw.Src)
 
 	if err := jpeg.Encode(cfg.Destination, centered, &jpeg.Options{
-		Quality: 80,
+		Quality: cfg.Quality,
 	}); err != nil {
 		return errors.Wrap(err, "map-generator")
 	}
