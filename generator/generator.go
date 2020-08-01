@@ -107,8 +107,8 @@ func Generate(cfg Config) error {
 			}
 			for _, village := range m.Villages {
 				if m.Larger {
-					for y := 1; y <= 4; y++ {
-						for x := 1; x <= 4; x++ {
+					for y := 1; y <= 2; y++ {
+						for x := 1; x <= 2; x++ {
 							img.Set(village.X+x, village.Y, parsedColor)
 							img.Set(village.X-x, village.Y, parsedColor)
 							img.Set(village.X, village.Y+y, parsedColor)
