@@ -24,22 +24,28 @@ const (
 type Marker struct {
 	Larger   bool
 	Villages []*models.Village `json:"villages" gqlgen:"villages" xml:"villages"`
-	Color    string            `json:"color" gqlgen:"color" xml:"color"`
+	// Color in HEX format
+	Color string `json:"color" gqlgen:"color" xml:"color"`
 }
 
 type Config struct {
-	Markers              []*Marker
-	Destination          io.Writer
-	MapSize              int
-	ContinentGrid        bool
-	ContinentNumbers     bool
-	BackgroundColor      string
-	GridLineColor        string
+	Markers     []*Marker
+	Destination io.Writer
+	// Default 1000x1000
+	MapSize          int
+	ContinentGrid    bool
+	ContinentNumbers bool
+	// BackgroundColor in HEX format
+	BackgroundColor string
+	// GridLineColor in HEX format
+	GridLineColor string
+	// ContinentNumberColor in HEX format
 	ContinentNumberColor string
 	Scale                float32
 	CenterX              int
 	CenterY              int
-	Quality              int
+	// Quality of image (1-100)
+	Quality int
 }
 
 func (cfg *Config) init() {
@@ -55,7 +61,7 @@ func (cfg *Config) init() {
 	if cfg.MapSize <= 0 {
 		cfg.MapSize = defaultMapSize
 	}
-	if cfg.Quality <= 0 {
+	if cfg.Quality <= 0 || cfg.Quality > 100 {
 		cfg.Quality = defaultQuality
 	}
 	if cfg.Scale < 1 {
