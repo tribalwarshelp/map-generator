@@ -105,7 +105,7 @@ func Generate(cfg Config) error {
 		for _, village := range m.Villages {
 			limit := 1
 			if m.Larger {
-				limit = 3
+				limit = 2
 			}
 			rect := image.Rect(village.X-limit, village.Y-limit, village.X+limit, village.Y+limit)
 			draw.Draw(img, rect, &image.Uniform{parsedColor}, image.Point{}, draw.Src)
