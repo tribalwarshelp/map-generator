@@ -11,8 +11,8 @@ import (
 )
 
 func main() {
-	villages := generateVillages(10)
-	villages2 := generateVillages(0.01)
+	villages := generateVillages(1)
+	villages2 := generateVillages(1)
 	t1 := time.Now()
 	f, _ := os.Create("image.jpeg")
 	defer f.Close()
@@ -22,14 +22,16 @@ func main() {
 		Scale:            1,
 		ContinentGrid:    true,
 		ContinentNumbers: true,
+		Quality:          100,
+		BackgroundColor:  "#000",
 		Markers: []*generator.Marker{
-			&generator.Marker{
+			{
 				Color:    "#f00",
 				Villages: villages,
 				Larger:   false,
 			},
-			&generator.Marker{
-				Color:    "#fff",
+			{
+				Color:    "#0f0",
 				Villages: villages2,
 				Larger:   true,
 			},

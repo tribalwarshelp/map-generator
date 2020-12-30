@@ -18,7 +18,7 @@ const (
 	defaultGridLineColor        = "#fff"
 	defaultContinentNumberColor = "#fff"
 	defaultMapSize              = 1000
-	defaultQuality              = 80
+	defaultQuality              = 100
 )
 
 type Marker struct {
@@ -93,39 +93,22 @@ func Generate(cfg Config) error {
 			return errors.Wrap(err, "map-generator")
 		}
 
-		// Background.
-		for y := 0; y < cfg.MapSize; y++ {
-			for x := 0; x < cfg.MapSize; x++ {
-				img.Set(x, y, backgroundColor)
-			}
-		}
+		draw.Draw(img, img.Bounds(), &image.Uniform{backgroundColor}, image.Point{}, draw.Src)
 	}
 
-	// Markers
 	for _, marker := range cfg.Markers {
 		m := marker
 		parsedColor, err := parseHexColorFast(m.Color)
 		if err != nil {
-			return err
+			return errors.Wrap(err, "map-generator")
 		}
 		for _, village := range m.Villages {
 			limit := 1
 			if m.Larger {
-				limit = 4
+				limit = 3
 			}
-			for y := 1; y <= limit; y++ {
-				for x := 1; x <= limit; x++ {
-					img.Set(village.X+x, village.Y, parsedColor)
-					img.Set(village.X-x, village.Y, parsedColor)
-					img.Set(village.X, village.Y+y, parsedColor)
-					img.Set(village.X, village.Y-y, parsedColor)
-					img.Set(village.X+x, village.Y-y, parsedColor)
-					img.Set(village.X-x, village.Y-y, parsedColor)
-					img.Set(village.X+x, village.Y+y, parsedColor)
-					img.Set(village.X-x, village.Y+y, parsedColor)
-				}
-			}
-			img.Set(village.X, village.Y, parsedColor)
+			rect := image.Rect(village.X-limit, village.Y-limit, village.X+limit, village.Y+limit)
+			draw.Draw(img, rect, &image.Uniform{parsedColor}, image.Point{}, draw.Src)
 		}
 	}
 
