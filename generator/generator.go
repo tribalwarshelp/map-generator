@@ -5,6 +5,7 @@ import (
 	"image"
 	"image/draw"
 	"image/jpeg"
+	"image/png"
 	"io"
 
 	"github.com/disintegration/imaging"
@@ -44,7 +45,8 @@ type Config struct {
 	Scale                float32
 	CenterX              int
 	CenterY              int
-	// Quality of image (1-100)
+	PNG                  bool
+	// Quality of image (1-100), only for JPEG format
 	Quality int
 }
 
@@ -87,15 +89,14 @@ func Generate(cfg Config) error {
 	imgHalfWidth := cfg.MapSize / 2
 	imgHalfHeight := imgHalfWidth
 
-	if cfg.BackgroundColor != defaultBackgroundColor {
-		backgroundColor, err := parseHexColorFast(cfg.BackgroundColor)
-		if err != nil {
-			return errors.Wrap(err, "map-generator")
-		}
-
-		draw.Draw(img, img.Bounds(), &image.Uniform{backgroundColor}, image.Point{}, draw.Src)
+	//background
+	backgroundColor, err := parseHexColorFast(cfg.BackgroundColor)
+	if err != nil {
+		return errors.Wrap(err, "map-generator")
 	}
+	draw.Draw(img, img.Bounds(), &image.Uniform{backgroundColor}, image.Point{}, draw.Src)
 
+	//markers
 	for _, marker := range cfg.Markers {
 		m := marker
 		parsedColor, err := parseHexColorFast(m.Color)
@@ -108,7 +109,7 @@ func Generate(cfg Config) error {
 				limit = 2
 			}
 			rect := image.Rect(village.X-limit, village.Y-limit, village.X+limit+1, village.Y+limit+1)
-			draw.Draw(img, rect, &image.Uniform{parsedColor}, image.Point{}, draw.Src)
+			draw.Draw(img, rect, &image.Uniform{parsedColor}, image.Point{}, draw.Over)
 		}
 	}
 
@@ -157,10 +158,16 @@ func Generate(cfg Config) error {
 		Y: cfg.CenterY - imgHalfHeight,
 	}, draw.Src)
 
-	if err := jpeg.Encode(cfg.Destination, centered, &jpeg.Options{
-		Quality: cfg.Quality,
-	}); err != nil {
-		return errors.Wrap(err, "map-generator")
+	if cfg.PNG {
+		if err := png.Encode(cfg.Destination, centered); err != nil {
+			return errors.Wrap(err, "map-generator")
+		}
+	} else {
+		if err := jpeg.Encode(cfg.Destination, centered, &jpeg.Options{
+			Quality: cfg.Quality,
+		}); err != nil {
+			return errors.Wrap(err, "map-generator")
+		}
 	}
 	return nil
 }
