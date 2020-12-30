@@ -12,7 +12,7 @@ import (
 
 func main() {
 	villages := generateVillages(1)
-	villages2 := generateVillages(1)
+	villages2 := generateVillages(0.01)
 	t1 := time.Now()
 	f, _ := os.Create("image.jpeg")
 	defer f.Close()
@@ -26,7 +26,7 @@ func main() {
 		BackgroundColor:  "#000",
 		Markers: []*generator.Marker{
 			{
-				Color:    "#f00",
+				Color:    "#f0f",
 				Villages: villages,
 				Larger:   false,
 			},

@@ -103,11 +103,11 @@ func Generate(cfg Config) error {
 			return errors.Wrap(err, "map-generator")
 		}
 		for _, village := range m.Villages {
-			limit := 1
+			limit := 0
 			if m.Larger {
 				limit = 2
 			}
-			rect := image.Rect(village.X-limit, village.Y-limit, village.X+limit, village.Y+limit)
+			rect := image.Rect(village.X-limit, village.Y-limit, village.X+limit+1, village.Y+limit+1)
 			draw.Draw(img, rect, &image.Uniform{parsedColor}, image.Point{}, draw.Src)
 		}
 	}
