@@ -109,18 +109,20 @@ func Generate(cfg Config) error {
 			return err
 		}
 		for _, village := range m.Villages {
+			limit := 1
 			if m.Larger {
-				for y := 1; y <= 1; y++ {
-					for x := 1; x <= 1; x++ {
-						img.Set(village.X+x, village.Y, parsedColor)
-						img.Set(village.X-x, village.Y, parsedColor)
-						img.Set(village.X, village.Y+y, parsedColor)
-						img.Set(village.X, village.Y-y, parsedColor)
-						img.Set(village.X+x, village.Y-y, parsedColor)
-						img.Set(village.X-x, village.Y-y, parsedColor)
-						img.Set(village.X+x, village.Y+y, parsedColor)
-						img.Set(village.X-x, village.Y+y, parsedColor)
-					}
+				limit = 4
+			}
+			for y := 1; y <= limit; y++ {
+				for x := 1; x <= limit; x++ {
+					img.Set(village.X+x, village.Y, parsedColor)
+					img.Set(village.X-x, village.Y, parsedColor)
+					img.Set(village.X, village.Y+y, parsedColor)
+					img.Set(village.X, village.Y-y, parsedColor)
+					img.Set(village.X+x, village.Y-y, parsedColor)
+					img.Set(village.X-x, village.Y-y, parsedColor)
+					img.Set(village.X+x, village.Y+y, parsedColor)
+					img.Set(village.X-x, village.Y+y, parsedColor)
 				}
 			}
 			img.Set(village.X, village.Y, parsedColor)
