@@ -2,6 +2,7 @@ package generator
 
 import (
 	"fmt"
+	"github.com/tribalwarshelp/shared/tw/twmodel"
 	"image"
 	"image/draw"
 	"image/jpeg"
@@ -11,7 +12,6 @@ import (
 	"github.com/disintegration/imaging"
 
 	"github.com/pkg/errors"
-	"github.com/tribalwarshelp/shared/models"
 )
 
 const (
@@ -24,7 +24,7 @@ const (
 
 type Marker struct {
 	Larger   bool
-	Villages []*models.Village `json:"villages" gqlgen:"villages" xml:"villages"`
+	Villages []*twmodel.Village `json:"villages" gqlgen:"villages" xml:"villages"`
 	// Color in HEX format
 	Color string `json:"color" gqlgen:"color" xml:"color"`
 }
