@@ -1,10 +1,10 @@
 cloud.google.com/go v0.26.0/go.mod h1:aQUYkXzVsufM+DwF1aE+0xfcU+56JwCaLick0ClmMTw=
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/Kichiyaki/go-php-serialize v0.0.0-20200601110855-47b6982acf83/go.mod h1:+iGkf5HfOVeRVd9K7qQDucIl+/Kt3MyenMa90b/O/c4=
-github.com/Kichiyaki/gopgutil/v10 v10.0.0-20210502103432-20b73c1e09b3 h1:kF01z5HAcpmn8PeGysegVKWblqV/t+boiZFi+6TIFVM=
-github.com/Kichiyaki/gopgutil/v10 v10.0.0-20210502103432-20b73c1e09b3/go.mod h1:Ol4iqPU50Ena5DFDOJvGnr17/gVbnhqSW/TuI0mWyo4=
-github.com/Kichiyaki/goutil v0.0.0-20210502095630-318d17091eab h1:XFHuFbQQPKkSYw/Z+nQ0ZeOz/Bx3PFWRk0lWtJc7yx8=
-github.com/Kichiyaki/goutil v0.0.0-20210502095630-318d17091eab/go.mod h1:+HhI932Xb0xrCodNcCv5GPiCjLYhDxWhCtlEqMIJhB4=
+github.com/Kichiyaki/gopgutil/v10 v10.0.0-20210502140321-8b7f2b75ad67 h1:bg+jweFLCKC5X2tKck8IXmAbkOW26hxibg9Od1+eCKA=
+github.com/Kichiyaki/gopgutil/v10 v10.0.0-20210502140321-8b7f2b75ad67/go.mod h1:Q3QaLlZY3/FcqwmTpdYqoAAGCmPYzrL7hCL7e5kzmjQ=
+github.com/Kichiyaki/goutil v0.0.0-20210502135617-7868852b90cc h1:055XPMujAD91cCD8KhbXgpjekwK0AOLEPN54n6A7308=
+github.com/Kichiyaki/goutil v0.0.0-20210502135617-7868852b90cc/go.mod h1:+HhI932Xb0xrCodNcCv5GPiCjLYhDxWhCtlEqMIJhB4=
 github.com/census-instrumentation/opencensus-proto v0.2.1/go.mod h1:f6KPmirojxKA12rnyqOA5BBL4O983OfeGPqjHWSTneU=
 github.com/client9/misspell v0.3.4/go.mod h1:qj6jICC3Q7zFZvVWo7KLAzC3yx5G7kyvSDkc90ppPyw=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
@@ -71,8 +71,8 @@ github.com/stretchr/testify v1.7.0 h1:nwc3DEeHmmLAfoZucVR881uASk0Mfjw8xYJ99tb5Cc
 github.com/stretchr/testify v1.7.0/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/h/Wwjteg=
 github.com/tmthrgd/go-hex v0.0.0-20190904060850-447a3041c3bc h1:9lRDQMhESg+zvGYmW5DyG0UqvY96Bu5QYsTLvCHdrgo=
 github.com/tmthrgd/go-hex v0.0.0-20190904060850-447a3041c3bc/go.mod h1:bciPuU6GHm1iF1pBvUfxfsH0Wmnc2VbpgvbI9ZWuIRs=
-github.com/tribalwarshelp/shared v0.0.0-20210502133808-117175dd77c5 h1:CcQGNQeUUuAGcrpYuCkbxoSHyPFA4m/jXtwaBCKyAKM=
-github.com/tribalwarshelp/shared v0.0.0-20210502133808-117175dd77c5/go.mod h1:wWzPDWqUenFd0xTKiHSa92y9pIn8nUY6UcNxtaashIE=
+github.com/tribalwarshelp/shared v0.0.0-20210502140609-e137bd656c94 h1:tQysqj1zlVBLFiRqVYRlRd4hPg5EBKGwYav7+gjxQMo=
+github.com/tribalwarshelp/shared v0.0.0-20210502140609-e137bd656c94/go.mod h1:NDNw8pZ/lbNaORVwGWl22+Czf4pwtwXELR2ExeUn0q0=
 github.com/vmihailenco/bufpool v0.1.11 h1:gOq2WmBrq0i2yW5QJ16ykccQ4wH9UyEsgLm6czKAd94=
 github.com/vmihailenco/bufpool v0.1.11/go.mod h1:AFf/MOy3l2CFTKbxwt0mp2MwnqjNEs5H/UxrkA5jxTQ=
 github.com/vmihailenco/msgpack/v5 v5.3.0/go.mod h1:7xyJ9e+0+9SaZT0Wt1RGleJXzli6Q/V5KbhBonMG9jc=
