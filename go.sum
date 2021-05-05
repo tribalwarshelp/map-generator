@@ -73,6 +73,8 @@ github.com/tmthrgd/go-hex v0.0.0-20190904060850-447a3041c3bc h1:9lRDQMhESg+zvGYm
 github.com/tmthrgd/go-hex v0.0.0-20190904060850-447a3041c3bc/go.mod h1:bciPuU6GHm1iF1pBvUfxfsH0Wmnc2VbpgvbI9ZWuIRs=
 github.com/tribalwarshelp/shared v0.0.0-20210505171518-9aa09097fd04 h1:phczaKfpeiQt+JGnlVCuInrlv0etMk0f9RSJ9GmsgzQ=
 github.com/tribalwarshelp/shared v0.0.0-20210505171518-9aa09097fd04/go.mod h1:GBnSKQrxL8Nmi3MViIzZVbyP9+ugd28gWArsSvw1iVU=
+github.com/tribalwarshelp/shared v0.0.0-20210505172413-bf85190fd66d h1:aMlYOsJbYwKqHx7wAt526eIutV1Q5EnYK6b7lOzvPmk=
+github.com/tribalwarshelp/shared v0.0.0-20210505172413-bf85190fd66d/go.mod h1:GBnSKQrxL8Nmi3MViIzZVbyP9+ugd28gWArsSvw1iVU=
 github.com/vmihailenco/bufpool v0.1.11 h1:gOq2WmBrq0i2yW5QJ16ykccQ4wH9UyEsgLm6czKAd94=
 github.com/vmihailenco/bufpool v0.1.11/go.mod h1:AFf/MOy3l2CFTKbxwt0mp2MwnqjNEs5H/UxrkA5jxTQ=
 github.com/vmihailenco/msgpack/v5 v5.3.0/go.mod h1:7xyJ9e+0+9SaZT0Wt1RGleJXzli6Q/V5KbhBonMG9jc=
