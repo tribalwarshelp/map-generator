@@ -1,7 +1,7 @@
 package generator
 
 import (
-	"fmt"
+	"github.com/pkg/errors"
 	"image"
 	"image/color"
 
@@ -11,7 +11,7 @@ import (
 )
 
 var (
-	errInvalidFormat = fmt.Errorf("invalid format")
+	errInvalidFormat = errors.New("invalid format")
 )
 
 func parseHexColorFast(s string) (color.RGBA, error) {

@@ -1,13 +1,13 @@
 package main
 
 import (
+	"github.com/tribalwarshelp/shared/tw/twmodel"
 	"log"
 	"math/rand"
 	"os"
 	"time"
 
 	"github.com/tribalwarshelp/map-generator/generator"
-	"github.com/tribalwarshelp/shared/models"
 )
 
 func main() {
@@ -40,12 +40,12 @@ func main() {
 	log.Println(time.Now().Sub(t1).String(), err)
 }
 
-func generateVillages(ch float32) []*models.Village {
-	villages := []*models.Village{}
+func generateVillages(ch float32) []*twmodel.Village {
+	villages := []*twmodel.Village{}
 	for y := 0; y <= 1000; y++ {
 		for x := 0; x <= 1000; x++ {
 			if rand.Float32()*100 <= ch {
-				villages = append(villages, &models.Village{
+				villages = append(villages, &twmodel.Village{
 					X: x,
 					Y: y,
 				})
