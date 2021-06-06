@@ -1,3 +1,3 @@
 # map-generator
 
-[TribalWars](https://www.tribalwars.net/en-dk/) server map generation package.
+A package for generating server maps.
