@@ -87,6 +87,8 @@ github.com/tribalwarshelp/shared v0.0.0-20210704200704-f3e5bd092975 h1:H0Dm+nHpb
 github.com/tribalwarshelp/shared v0.0.0-20210704200704-f3e5bd092975/go.mod h1:R7761+5rdyaMUM2dPMgBma05Z8XDgA3bCl/Grydb09g=
 github.com/tribalwarshelp/shared v0.0.0-20210712092456-dcd6203b1fd9 h1:rpuecZUAul4lCdcWjYx05ZNDff6RBbwJatxOcYpFjRY=
 github.com/tribalwarshelp/shared v0.0.0-20210712092456-dcd6203b1fd9/go.mod h1:M+33qeTM/oxG7IyxKbIZqs0wqpB5nEHPfgdo29kqHMI=
+github.com/tribalwarshelp/shared v0.0.0-20210717070514-5030d62000d4 h1:lnbuxPwiWsCTLeFCvuxDRNlqYvD1O/ssYE52HInqdAY=
+github.com/tribalwarshelp/shared v0.0.0-20210717070514-5030d62000d4/go.mod h1:6xooIU27fjagr/KVBPayktW4gn9ylTdBPGgxlQ6+x9s=
 github.com/vmihailenco/bufpool v0.1.11 h1:gOq2WmBrq0i2yW5QJ16ykccQ4wH9UyEsgLm6czKAd94=
 github.com/vmihailenco/bufpool v0.1.11/go.mod h1:AFf/MOy3l2CFTKbxwt0mp2MwnqjNEs5H/UxrkA5jxTQ=
 github.com/vmihailenco/msgpack/v5 v5.3.0/go.mod h1:7xyJ9e+0+9SaZT0Wt1RGleJXzli6Q/V5KbhBonMG9jc=
@@ -196,6 +198,7 @@ gopkg.in/yaml.v2 v2.3.0 h1:clyUAQHOM3G0M3f5vQj7LuJrETvjVot3Z5el9nffUtU=
 gopkg.in/yaml.v2 v2.3.0/go.mod h1:hI93XBmqTisBFMUTm0b8Fm+jr3Dg1NNxqwp+5A1VGuI=
 gopkg.in/yaml.v3 v3.0.0-20200313102051-9f266ea9e77c h1:dUUwHk2QECo/6vqA44rthZ8ie2QXMNeKRTHCNY2nXvo=
 gopkg.in/yaml.v3 v3.0.0-20200313102051-9f266ea9e77c/go.mod h1:K4uyk7z7BCEPqu6E+C64Yfv1cQ7kz7rIZviUmN+EgEM=
+gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b/go.mod h1:K4uyk7z7BCEPqu6E+C64Yfv1cQ7kz7rIZviUmN+EgEM=
 honnef.co/go/tools v0.0.0-20190102054323-c2f93a96b099/go.mod h1:rf3lG4BRIbNafJWhAfAdb/ePZxsR/4RtNHQocxwk9r4=
 honnef.co/go/tools v0.0.0-20190523083050-ea95bdfd59fc/go.mod h1:rf3lG4BRIbNafJWhAfAdb/ePZxsR/4RtNHQocxwk9r4=
 mellium.im/sasl v0.2.1 h1:nspKSRg7/SyO0cRGY71OkfHab8tf9kCts6a6oTDut0w=
