@@ -5,14 +5,14 @@ go 1.17
 require (
 	github.com/disintegration/imaging v1.6.2
 	github.com/pkg/errors v0.9.1
-	github.com/tribalwarshelp/shared v0.0.0-20210822141120-6c7e460daed8
+	github.com/tribalwarshelp/shared v0.0.0-20210825131936-340bd352f411
 	golang.org/x/image v0.0.0-20210628002857-a66eb6448b8d
 )
 
 require (
 	github.com/Kichiyaki/gopgutil/v10 v10.0.0-20210822140115-69ad4084d89f // indirect
 	github.com/Kichiyaki/goutil v0.1.0 // indirect
-	github.com/go-pg/pg/v10 v10.10.3 // indirect
+	github.com/go-pg/pg/v10 v10.10.4 // indirect
 	github.com/go-pg/zerochecker v0.2.0 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/tmthrgd/go-hex v0.0.0-20190904060850-447a3041c3bc // indirect
