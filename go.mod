@@ -6,7 +6,7 @@ require (
 	github.com/disintegration/imaging v1.6.2
 	github.com/pkg/errors v0.9.1
 	github.com/tribalwarshelp/shared v0.0.0-20220218101729-f4cb4c1f2026
-	golang.org/x/image v0.0.0-20211028202545-6944b10bf410
+	golang.org/x/image v0.0.0-20220413100746-70e8d0d3baa9
 )
 
 require (
